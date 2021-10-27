@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+ 
+#digit_clock_time {
+  font-family: 'Work Sans', sans-serif;
+  color: #66ff99;
+  font-size: 35px;
+  text-align: center;
+  padding-top: 20px;
+}
+#digit_clock_date {
+  font-family: 'Work Sans', sans-serif;
+  color: #66ff99;
+  font-size: 20px;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.digital_clock_wrapper{
+    background-color: #333;
+    padding: 25px;
+    max-width: 350px;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+    margin: 0 auto;
+}
