@@ -10,8 +10,10 @@
     public $voter_status;
     public $civil_status;
     public $gender;
-    public $nickname;
+    public $purok;
     public $password;
+    public $total;
+    public $img;
 
     public function __construct($db) {
       $this->conn = $db;
@@ -22,6 +24,14 @@
       $stmt->execute();
       return $stmt;
     }
+
+    public function purok() {
+      $query = 'SELECT COUNT(*) as total, purok FROM '. $this->table .' GROUP BY purok;';
+      $stmt = $this->conn->prepare($query);
+      $stmt->execute();
+      return $stmt;
+    }
+
     public function read_single() {
       $query = 'SELECT * FROM '.$this->table.' WHERE id = ? LIMIT 0,1';
       $stmt = $this->conn->prepare($query);
@@ -34,20 +44,20 @@
       $this->password = $row['password'];
     }
     public function create(){
-      $query = 'INSERT INTO '.$this->table.'(`name`, `email`, `birthdate`, `address`, `gender`, `nickname`, `voter_status`, `civil_status`) VALUES (:name, :email, :birthdate, :address, :gender, :nickname, :voter_status, :civil_status)';
+      $query = 'INSERT INTO '.$this->table.'(`name`, `email`, `birthdate`, `address`, `gender`, `purok`, `voter_status`, `civil_status`) VALUES (:name, :email, :birthdate, :address, :gender, :purok, :voter_status, :civil_status)';
       $stmt = $this->conn->prepare($query);
       $this->name = htmlspecialchars(strip_tags($this->name));
       $this->email = htmlspecialchars(strip_tags($this->email));
       $this->birthdate = htmlspecialchars(strip_tags($this->birthdate));
       $this->address = htmlspecialchars(strip_tags($this->address));
-      $this->nickname = htmlspecialchars(strip_tags($this->nickname));
+      $this->purok = htmlspecialchars(strip_tags($this->purok));
       $this->gender = htmlspecialchars(strip_tags($this->gender));
       $this->voter_status = htmlspecialchars(strip_tags($this->voter_status));
       $this->civil_status = htmlspecialchars(strip_tags($this->civil_status));
       $stmt->bindParam(':name', $this->name);
       $stmt->bindParam(':email', $this->email);
       $stmt->bindParam(':birthdate', $this->birthdate);
-      $stmt->bindParam(':nickname', $this->nickname);
+      $stmt->bindParam(':purok', $this->purok);
       $stmt->bindParam(':gender', $this->gender);
       $stmt->bindParam(':address', $this->address);
        $stmt->bindParam(':voter_status', $this->voter_status);
@@ -60,14 +70,14 @@
     }
     public function update(){
       $query = 'UPDATE '.$this->table.' SET name = :name, email = :email, birthdate = :birthdate, address = :address, voter_status = :voter_status,
-       civil_status = :civil_status, gender = :gender, nickname = :nickname WHERE id = :id';
+       civil_status = :civil_status, gender = :gender, purok = :purok WHERE id = :id';
       $stmt = $this->conn->prepare($query);
       $this->name = htmlspecialchars(strip_tags($this->name));
       $this->email = htmlspecialchars(strip_tags($this->email));
       $this->birthdate = htmlspecialchars(strip_tags($this->birthdate));
       $this->address = htmlspecialchars(strip_tags($this->address));
       $this->gender = htmlspecialchars(strip_tags($this->gender));
-      $this->nickname = htmlspecialchars(strip_tags($this->nickname));
+      $this->purok = htmlspecialchars(strip_tags($this->purok));
       $this->voter_status = htmlspecialchars(strip_tags($this->voter_status));
       $this->civil_status = htmlspecialchars(strip_tags($this->civil_status));
       $this->id = htmlspecialchars(strip_tags($this->id));
@@ -76,7 +86,7 @@
       $stmt->bindParam(':birthdate', $this->birthdate);
       $stmt->bindParam(':address', $this->address);
       $stmt->bindParam(':gender', $this->gender);
-      $stmt->bindParam(':nickname', $this->nickname);
+      $stmt->bindParam(':purok', $this->purok);
       $stmt->bindParam(':voter_status', $this->voter_status);
       $stmt->bindParam(':civil_status', $this->civil_status);
       $stmt->bindParam(':id', $this->id);

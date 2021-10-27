@@ -20,14 +20,22 @@
   if($data->voter_status === ""){
     $data->voter_status = "no";
   }
+  if($data->birthdate === ""){
+    $data->birthdate = "";
+  }
+  if($data->img === ""){
+    $data->img = "";
+  }
+
   $post->name = $data->name;
   $post->email = $data->email;
   $post->address = $data->address;
   $post->birthdate = $data->birthdate;
   $post->gender = $data->gender;
-  $post->nickname = $data->nickname;
+  $post->purok = $data->purok;
   $post->voter_status = $data->voter_status;
   $post->civil_status = $data->civil_status;
+  $post->img = $data->img;
 
   if($post->create()){
     echo json_encode(array('message' => 'Post Created'));

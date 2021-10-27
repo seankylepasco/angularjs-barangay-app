@@ -9,7 +9,7 @@
   $database = new Database();
   $db = $database->connect();
   $post = new Post($db);
-  $result = $post->read();
+  $result = $post->purok();
   $num = $result->rowCount();
 
   if($num > 0) {
@@ -17,17 +17,9 @@
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
       extract($row);
       $post_item = array(
-        'id' => $id,
-        'name' => $name,
-        'email' => $email,
-        'password' => $password,
-        'birthdate' => $birthdate,
-        'address' => $address,
-        'gender'=> $gender,
+        'total' => $total,
         'purok' => $purok,
-        'voter_status' => $voter_status,
-        'civil_status' => $civil_status,
-        'img'=> $img
+
       );
       array_push($posts_arr, $post_item);
     }

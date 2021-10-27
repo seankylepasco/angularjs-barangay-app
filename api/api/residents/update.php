@@ -22,7 +22,7 @@
   $post->birthdate = $data->birthdate;
   $post->address = $data->address;
   $post->gender = $data->gender;
-  $post->nickname = $data->nickname;
+  $post->purok = $data->purok;
   $post->voter_status = $data->voter_status;
   $post->civil_status = $data->civil_status;
   // Update Post.
