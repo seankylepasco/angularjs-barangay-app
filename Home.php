@@ -30,6 +30,7 @@
           <div class="col">
 
             <a href="Home.php"><i class="fa fa-user"></i> &nbsp; Home</a>
+            <a href="Chart.php"><i class="fas fa-chart-pie"></i> &nbsp; Chart</a>
             <a href="ResidentClearance.php"><i class="fa fa-users"></i> &nbsp; Barangay Clearance</a>
             <a href="ResidentIndigency.php"><i class="fa fa-users"></i> &nbsp; Certificate of Indigency</a>
             <a href="ResidentPermit.php"><i class="fa fa-users"></i> &nbsp;  Barangay Permit</a>
@@ -71,9 +72,6 @@
       </div>
         
       <div class="center col">
-        <br><br>
-        <!-- CHART -->
-        <div id="chartContainer"></div>
 
         <br><br>
         <!-- TABLE -->
@@ -121,7 +119,7 @@
 
         <!-- UPDATE MODAL -->
         <div id="edit-modal" class="modal">
-          <div class="modal-content">
+          <div class="modal-content col">
 
             <div class="modal-header">
               <span class="close button-1" ng-click="closeEdit()">&times;</span>
@@ -130,42 +128,42 @@
 
             <div class="modal-body">
               <form>
-                <input ng-model="edit_id" id="id" type="hidden" style="width: 90%" required>
+                <input ng-model="edit_id" id="edit_id" type="hidden" style="width: 90%" required>
                 <br><br> 
-                Fullname
-                <input ng-model="edit_name" id="name" type="text" style="width: 90%" required>
+                <label for="edit_name">Fullname</label>
+                <input ng-model="edit_name" id="edit_name" type="text" style="width: 90%" required>
                 <br><br>
-                Email
-                <input  ng-model="edit_email"  id="email" type="text" style="width: 90%" required>
+                <label for="edit_email">Email</label>
+                <input  ng-model="edit_email"  id="edit_email" type="text" style="width: 90%" required>
                 <br><br>
-                Purok
-                <select ng-model="edit_purok" style="width: 90%" required>
+                <label for="edit_purok">Purok</label>
+                <select ng-model="edit_purok" id="edit_purok" style="width: 90%" required>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
                   <option value="4">4</option>
                 </select>
                 <br><br>
-                Birthdate
-                <input ng-model="edit_birthdate" id="birthdate" type="date" style="width: 90%" required>
+                <label for="edit_birthdate">Birthdate</label>
+                <input ng-model="edit_birthdate" id="edit_birthdate" type="date" style="width: 90%" required>
                 <br><br>
-                Address
-                <input  ng-model="edit_address" id="address" type="text" style="width: 90%" required>
+                <label for="edit_address">Address</label>
+                <input  ng-model="edit_address" id="edit_address" type="text" style="width: 90%" required>
                 <br><br>
-                Gender
-                <select ng-model="edit_gender" style="width: 90%" required>
+                <label for="edit_gender">Gender</label>
+                <select ng-model="edit_gender" id="edit_gender" style="width: 90%" required>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
                 <br><br>
-                voter status
-                <select ng-model="edit_voter_status" style="width: 90%" required>
+                <label for="edit_voter_status">voter status</label>
+                <select ng-model="edit_voter_status" id="edit_voter_status" style="width: 90%" required>
                   <option value="yes">yes</option>
                   <option value="no">no</option>
                 </select>
                 <br><br> 
-                civil status
-                <select ng-model="edit_civil_status" style="width: 90%" required>
+                <label for="edit_voter_status">civil status</label>
+                <select ng-model="edit_civil_status" id="edit_civil_status" style="width: 90%" required>
                   <option value="married">married</option>
                   <option value="single">single</option>
                 </select>
@@ -184,7 +182,7 @@
 
         <!-- ADD MODAL -->
         <div id="add-modal" class="modal">
-          <div class="modal-content">
+          <div class="modal-content col">
             <span ng-click="closeAdd()" class="close button-1">&times;</span>
             <h3>Create New Resident</h3>
             <form>
@@ -192,7 +190,8 @@
               <br><br> 
               <input ng-model="email" type="text" placeholder="email" style="width: 90%" required> 
               <br><br> 
-              Purok
+              <label>Purok</label>
+              <br>
               <select ng-model="purok" style="width: 90%" required>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -200,24 +199,25 @@
                 <option value="4">4</option>
               </select>
               <br><br>
-              Gender
+              <label>Gender</label>
+              <br>
               <select ng-model="gender" style="width: 90%" required>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
               </select>
               <br><br>
-              birthdate
+              <label>birthdate</label>
               <input ng-model="birthdate" type="date" placeholder="birthdate" style="width: 90%" required> 
               <br><br> 
               <input  ng-model="address" type="text" placeholder="address" style="width: 90%"> 
               <br><br> 
-              voter status
+              <label>voter status</label>
               <select ng-model="voter_status" style="width: 90%" required>
                 <option value="yes">yes</option>
                 <option value="no">no</option>
               </select>
               <br><br> 
-              civil status
+              <label>civil status</label>
               <select ng-model="civil_status" style="width: 90%" required>
                 <option value="married">married</option>
                 <option value="single">single</option>
@@ -243,8 +243,6 @@
   <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="js/time.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   <script type="text/javascript" src='js/chart.js'></script>
 
 </html>

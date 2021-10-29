@@ -11,12 +11,12 @@
       $this->conn = $db;
     }
     public function login() {
-      $query = 'SELECT * FROM '.$this->table.' WHERE email = :email && password = :password ';
+      $query = 'SELECT * FROM '.$this->table.' WHERE email = :email ';
       $stmt = $this->conn->prepare($query);
       $this->email = htmlspecialchars(strip_tags($this->email));
-      $this->password = htmlspecialchars(strip_tags($this->password));
+
       $stmt->bindParam(':email', $this->email);
-      $stmt->bindParam(':password', $this->password);
+
       if($stmt->execute()){
         return $stmt;
       }

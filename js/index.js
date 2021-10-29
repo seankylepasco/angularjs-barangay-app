@@ -31,6 +31,7 @@ var app = angular.module("myapp",[]);
                  cancelButton: 'order-1 right-gap',
                  confirmButton: 'order-2',
                  denyButton: 'order-3',
+                 confirmButtonColor: '#00ADB5'
                }
              }).then((result) => {
                if (result.isConfirmed) {
@@ -60,7 +61,6 @@ var app = angular.module("myapp",[]);
                     d.setDate(day+1);
                     d = d;
                }
-          console.log($scope.img)
           $http.post("api/api/residents/create.php", {
             'name':$scope.name,
             'email':$scope.email,
@@ -69,11 +69,12 @@ var app = angular.module("myapp",[]);
             'gender':$scope.gender,
             'purok':$scope.purok,
             'voter_status':$scope.voter_status,
-            'civil_status':$scope.civil_status,
-            'img':$scope.img
+            'civil_status':$scope.civil_status
            })
           .success(function(data){  
+               console.log(data)
                alert("record added successfully!");
+               
                $scope.displayData();
                document.getElementById("add-modal").style.display = "none";
                $scope.name = "";
@@ -132,7 +133,6 @@ var app = angular.module("myapp",[]);
      }
 // --------------- SELECT PHOTO -----------------------
      $scope.setPhoto = function(){
-          console.log("HSOOSOSSO")
           console.log($scope.img)
           $scope.img = event.target.files[0];
           var reader = new FileReader();

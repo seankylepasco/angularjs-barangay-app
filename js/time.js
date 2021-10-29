@@ -1,20 +1,17 @@
 $(document).ready(function () {
+
   function startTime() {
     var today = new Date();
     var h = today.getHours();
     var m = today.getMinutes();
     var s = today.getSeconds();
     var day = today.getDay();
-    
-    //Month, Year, Date
     var month = today.getMonth();
     var year = today.getFullYear();
     var date = today.getDate();
-
     var dd = (h >= 12) ? 'PM' : 'AM';
 
     h = (h > 12) ? (h - 12) : h;
-
     h = checkTime(h);
     m = checkTime(m);
     s = checkTime(s);
@@ -25,14 +22,17 @@ $(document).ready(function () {
     var t = setTimeout(startTime, 500);
     $('#day').html(day);
     $('#calendar').html(month + ' ' + date +','+year );
+  }
 
-      
-  }
   function checkTime(i) {
-    if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+
+    if (i < 10) { i = "0" + i };
     return i;
+
   }
+
   function checkDay(day) {
+
     if (day == 1) {
       return day = 'Monday';
     }
@@ -53,9 +53,13 @@ $(document).ready(function () {
     }
     else if(day == 0){
       return day = 'Sunday';
+
     }
+
   }
+
   function checkMonth(month){
+
     if (month == 0){
       return month = 'January';
     }
@@ -92,6 +96,7 @@ $(document).ready(function () {
     else if(month == 11){
       return month = 'December';
     }
+    
   }
 
   startTime();

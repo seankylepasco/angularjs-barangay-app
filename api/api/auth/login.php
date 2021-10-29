@@ -21,18 +21,17 @@
   $num = $result->rowCount();
 
   if($num > 0) {
-    $auths_arr = array();
+    $test_arr =array();
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-      extract($row);
-      $auth_item = array(
-        'id' => $id,
-        'name' => $name,
-        'email' => $email,
-        'password' => $password
-      );
-      array_push($auths_arr, $auth_item);
+      $verify = password_verify($data->password, $row['password']);
+      if($verify){
+        array_push($test_arr, $row);
+      }
+      else{
+        array_push($test_arr,  array('message' => 'No users Found'));
+      }
     }
-    echo json_encode($auths_arr);
+    echo json_encode($test_arr);
   } else {
     echo json_encode(
       array('message' => 'No users Found')

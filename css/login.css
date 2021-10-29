@@ -1,19 +1,26 @@
 *{
 	padding:0px;
 	margin:0px;
-	font-family:verdana;
-	box-sizing:border-box;
 }
-.form_style{
-   width: 400px;
-   margin: 0 auto;
- }
-body{
+body {
 	margin: 0;
 	padding: 0;
 	/* background-image: url("../img/bg.jpg"); */
 	background-size: cover;
 	background-repeat: no-repeat;
+}
+
+/* FORM LOGIN */
+.form_style{
+   width: 400px;
+   margin: 0 auto;
+ }
+
+ .container-body {
+	position: absolute;
+	width: 100%;
+	margin: auto;
+	top: 20px;
 }
 hr{
 	border: 0;
@@ -21,7 +28,7 @@ hr{
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 a{text-decoration:none;font-weight:600;}
-.link{color:#00aced;}
+.link{color:#292f38;}
 p{margin:5px 0px;}
 .box{
 	width:400px;
@@ -43,7 +50,7 @@ input[type="text"],input[type="password"],input[type="submit"],input[type="email
 }
 input[type="submit"]{
 	border: none;
-	background-color: #00ADB5;
+	background-color: #222831;
 	color:white;
 	font-size:16px;
 	font-weight:600;
@@ -62,13 +69,6 @@ header h4{
 	flex-grow: 1;
 	font-size: 20px;
 	font-weight: lighter;
-}
-
-.container-body {
-	position: absolute;
-	width: 100%;
-	margin: auto;
-	top: 20px;
 }
 
 /* LEFT RIGHT MIDDLE COLUMN ROW */

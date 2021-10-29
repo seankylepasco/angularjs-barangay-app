@@ -30,11 +30,13 @@
           <div class="col">
 
             <a href="Home.php"><i class="fa fa-user"></i> &nbsp; Home</a>
+            <a href="Chart.php"><i class="fas fa-chart-pie"></i> &nbsp; Chart</a>
             <a href="ResidentClearance.php"><i class="fa fa-users"></i> &nbsp; Barangay Clearance</a>
             <a href="ResidentIndigency.php"><i class="fa fa-users"></i> &nbsp; Certificate of Indigency</a>
             <a href="ResidentPermit.php"><i class="fa fa-users"></i> &nbsp;  Barangay Permit</a>
             <a href="Contact.php"><i class="fa fa-envelope" aria-hidden="true"></i> &nbsp; Contact Us</a>
             <a ng-click="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp; Logout</a>
+
 
           </div>
 

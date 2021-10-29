@@ -9,14 +9,12 @@
     <title>Barangay Records Management System</title>
     <link rel ="icon" href="img/Barangay Logo.png" type ="image/x-icon">
     <link rel="stylesheet" href="css/index.css"/>
-    <link rel="stylesheet" href="css/contact.css"/>
     <link type="text/css" rel="stylesheet" href="css/ionicons.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@8/dist/sweetalert2.min.css">
 
   </head>
-
-  <body class="background"  ng-app="myapp" ng-controller="usercontroller">
+  <body  ng-app="myapp" ng-controller="usercontroller" ng-init="displayData()">
       
       <nav id="nav" class="sidenav color-white">
 
@@ -25,9 +23,8 @@
                 <img src="img/Barangay Logo.png" class="icon">
               </div>
               <h4>Barangay Records Management System</h4>
-              <br>
               <hr>
-              <br>
+              <b class="row center"><p>Hello !&nbsp;<p id="superName"></p></p></b>
           </div>
 
           <div class="col">
@@ -47,6 +44,7 @@
     
     <div id="main">
 
+      <!-- HEADER -->
       <header>
 
         <button id="btn-open" class="button-17" role="button" ng-click="openNav()"><i class="fas fa-bars"></i></button> 
@@ -65,40 +63,20 @@
 
       </header>
 
-      <!-- EMAIL -->
-      <div class="wrapper">
-        <h2>Feedback</h2>
-        <div id="error_message"></div>
-        <form action="https://formsubmit.co/kennethfroymobo1975@gmail.com" onsubmit="return validate();" method="POST">
-          <div class="input_field">
-              <input type="text" placeholder="Fullname" id="name">
-          </div>
-          <div class="input_field">
-              <input type="text" placeholder="Subject" id="subject">
-          </div>
-          <div class="input_field">
-              <input type="number" placeholder="Contact Number" id="phone">
-          </div>
-          <div class="input_field">
-              <input type="text" placeholder="Email Address" id="email">
-          </div>
-          <div class="input_field">
-              <textarea placeholder="Message" id="message"></textarea>
-          </div>
-          <div class="center">
-              <button class="button-17" type="submit">Submit</button>
-          </div>
-        </form>
-      </div>
-    </div>
+      <div class="center col">
+        <br><br>
+        <!-- CHART -->
+        <div id="chartContainer" style="width:300px; height:350px"></div>
+
 
   </body>
-
   <script src="https://kit.fontawesome.com/c4442c2032.js" crossorigin="anonymous"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js'></script>
-  <script src="js/index.js"></script>  
+  <script src="js/index.js"></script>
   <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="js/time.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <script type="text/javascript" src='js/chart.js'></script>
 
 </html>

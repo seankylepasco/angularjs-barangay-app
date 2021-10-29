@@ -16,7 +16,7 @@
   
   $post->name = $data->name;
   $post->email = $data->email;
-  $post->password = $data->password;
+  $post->password = password_hash($data->password, PASSWORD_DEFAULT);
 
   if($post->register()){
     echo json_encode(array('message' => 'User Created'));

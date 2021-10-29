@@ -23,9 +23,9 @@
   if($data->birthdate === ""){
     $data->birthdate = "";
   }
-  if($data->img === ""){
-    $data->img = "";
-  }
+  // if($data->img === ""){
+  //   $data->img = "";
+  // }
 
   $post->name = $data->name;
   $post->email = $data->email;
@@ -35,7 +35,7 @@
   $post->purok = $data->purok;
   $post->voter_status = $data->voter_status;
   $post->civil_status = $data->civil_status;
-  $post->img = $data->img;
+  // $post->img = $data->img;
 
   if($post->create()){
     echo json_encode(array('message' => 'Post Created'));

@@ -336,8 +336,8 @@ header{
 }
 #chartContainer {
 	display: flex;
-	width: 500px;
-	height: 500px;
+	width: 200px;
+	height: 300px;
 }
   
 .icon{
@@ -367,7 +367,7 @@ header{
 		flex-direction: column;
 	}
 	#chartContainer, #day-container{
-		display: none;
+		width: 60%;
 	}
 	.table-container{
 		width: 380px;

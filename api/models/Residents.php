@@ -54,14 +54,16 @@
       $this->gender = htmlspecialchars(strip_tags($this->gender));
       $this->voter_status = htmlspecialchars(strip_tags($this->voter_status));
       $this->civil_status = htmlspecialchars(strip_tags($this->civil_status));
+      // $this->img = htmlspecialchars(strip_tags($this->img));
       $stmt->bindParam(':name', $this->name);
       $stmt->bindParam(':email', $this->email);
       $stmt->bindParam(':birthdate', $this->birthdate);
       $stmt->bindParam(':purok', $this->purok);
       $stmt->bindParam(':gender', $this->gender);
       $stmt->bindParam(':address', $this->address);
-       $stmt->bindParam(':voter_status', $this->voter_status);
-       $stmt->bindParam(':civil_status', $this->civil_status);
+      $stmt->bindParam(':voter_status', $this->voter_status);
+      $stmt->bindParam(':civil_status', $this->civil_status);
+      // $stmt->bindParam(':img', $this->img);
       if($stmt->execute()){
         return true;
       }

@@ -3,10 +3,9 @@ window.onload = function() {
     var dataPoints = [];
     
     var chart = new CanvasJS.Chart("chartContainer", {
-       
         animationEnabled: true,
-        title: {
-            text: "Purok Population",
+        title:{
+            text: "Purok Categories",
             horizontalAlign: "left"
         },
         data: [{
@@ -28,10 +27,5 @@ window.onload = function() {
         chart.render();
     
     }
-    $.getJSON("api/api/residents/purok.php", addData);
-    
-}
-
-function chartReload(){
-    $.getJSON("api/api/residents/purok.php", addData);
+    $.getJSON("api/api/residents/purok.php", addData);    
 }
