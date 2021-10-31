@@ -70,16 +70,16 @@ var app = angular.module("resident",[]);
           if(!$scope.name){
                alert('missing name!')
           }
-          if(!$scope.birthdate){
+          else if(!$scope.birthdate){
                alert('missing birthdate!')
           }
-          if(!$scope.address){
+          else if(!$scope.address){
                alert('missing address!')
           }
-          if(!$scope.gender){
+          else if(!$scope.gender){
                alert('missing gender!')
           }
-          if(!$scope.purok){
+          else if(!$scope.purok){
                alert('missing purok!')
           }
           var d = $scope.birthdate;
