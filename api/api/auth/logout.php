@@ -1,6 +1,9 @@
 <?php
+
     header("Location: ../../../Login Page.php");
-    echo json_encode("Logout Success! Bye..");
+
+    echo json_encode(array("message":"Logout Success! Bye.."));
+
     if (isset($_COOKIE['id'])) {
         unset($_COOKIE['id']); 
         setcookie('id', null, -1, '/'); 
@@ -15,4 +18,5 @@
     } else {
         return false;
     }
+
 ?>

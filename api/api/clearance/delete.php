@@ -5,19 +5,18 @@
   header('Acces-Control-Allow-Headers: Acces-Control-Allow-Headers, Content-Type, Acces-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../../config/Database.php';
-  include_once '../../models/Residents.php';
+  include_once '../../models/Clearance.php';
 
   $database = new Database();
   $db = $database->connect();
-  $post = new Post($db);
-
+  $clearance = new Clearance($db);
   $data = json_decode(file_get_contents("php://input"));
-  $post->id = $data->id;
+  $clearance->id = $data->id;
 
-  if($post->delete()){
-    echo json_encode(array('message' => 'Post Deleted'));
+  if($clearance->delete()){
+    echo json_encode(array('message' => 'Clearance Deleted'));
   }
   else{
-    echo json_encode(array('message' => 'Post Not Deleted'));
+    echo json_encode(array('message' => 'Clearance Not Deleted'));
   }
 ?>

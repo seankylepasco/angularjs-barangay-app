@@ -6,6 +6,7 @@
     public $name;
     public $email;
     public $password;
+    public $img;
 
     public function __construct($db) {
       $this->conn = $db;
@@ -14,9 +15,7 @@
       $query = 'SELECT * FROM '.$this->table.' WHERE email = :email ';
       $stmt = $this->conn->prepare($query);
       $this->email = htmlspecialchars(strip_tags($this->email));
-
       $stmt->bindParam(':email', $this->email);
-
       if($stmt->execute()){
         return $stmt;
       }
@@ -30,9 +29,11 @@
       $this->name = htmlspecialchars(strip_tags($this->name));
       $this->email = htmlspecialchars(strip_tags($this->email));
       $this->password = htmlspecialchars(strip_tags($this->password));
+      // $this->img = htmlspecialchars(strip_tags($this->img));
       $stmt->bindParam(':name', $this->name);
       $stmt->bindParam(':email', $this->email);
       $stmt->bindParam(':password', $this->password);
+      // $stmt->bindParam(':img', $this->img);
       if($stmt->execute()){
         return true;
       }

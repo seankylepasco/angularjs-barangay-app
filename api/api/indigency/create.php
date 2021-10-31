@@ -5,21 +5,23 @@
   header('Acces-Control-Allow-Headers: Acces-Control-Allow-Headers, Content-Type, Acces-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../../config/Database.php';
-  include_once '../../models/Auth.php';
+  include_once '../../models/Indigency.php';
 
   $database = new Database();
   $db = $database->connect();
-  $register = new Auth($db);
+
+  $indigency = new Indigency($db);
+
   $data = json_decode(file_get_contents("php://input"));
-  $register->name = $data->name;
-  $register->email = $data->email;
-  $register->password = password_hash($data->password, PASSWORD_DEFAULT);
-  // $register->img = $data->img;
-  if($register->register()){
-    echo json_encode(array('message' => 'User Created'));
+
+  $indigency->name = $data->name;
+  $indigency->address = $data->address;
+  $indigency->reason = $data->reason;
+
+  if($indigency->create()){
+    echo json_encode(array('message' => 'Indigency Created'));
   }
   else{
-    echo json_encode(array('message' => 'User Not Created'));
+    echo json_encode(array('message' => 'Indigency Not Created'));
   } 
-
 ?>

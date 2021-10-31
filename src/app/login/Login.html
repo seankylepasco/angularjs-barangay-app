@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title> Barangay Records Management System</title>
+	<link rel="stylesheet" href="login.css">
+	<link rel ="icon" href="../../assets/barangay/Barangay Logo.png" type ="image/x-icon">
+	<style type="text/css"></style> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@8/dist/sweetalert2.min.css">
+</head>
+
+<body ng-app="login" ng-controller="LoginController" ng-init="getUser()">
+    <!-- HEADER -->
+    <header>
+        <h4 style="margin-top:auto;margin-bottom:auto">Barangay Records Management System</h4>
+        <div class="row">
+            <div class="end">   
+                <img src="../../assets/barangay/kab-brgy.jpg" alt="image">
+                <img src="../../assets/barangay/Coders_HUB(Logo).jpg" alt="image">
+                <img src="../../assets/barangay/subic-bg.png" alt="image">
+                <img src="../../assets/barangay/gcccs.png" alt="image">
+            </div>
+        </div>
+    </header>
+    <hr>
+    <!-- CONTAINER -->
+    <div class="col">
+        <img src="../../assets/barangay/Barangay Logo.png" alt="image" style="height: 200px;width: 200px;" class="center">
+        <div class="container-body">
+            <div class="form_style center">
+
+                <!-- ALERT -->
+                <div class="alert {{alertClass}} alert-dismissible" ng-show="alertMsg">
+                    <a href="#" class="close" ng-click="closeMsg()" aria-label="close">&times;</a>
+                    {{alertMessage}}
+                </div>
+                <br>
+    
+                <!-- LOGIN FORM -->
+                <div ng-show="login_form" class="form">
+                    <div>
+                        <h3 class="panel-title">Login</h3>
+                    </div>
+                    <div>
+                        <form method="post" ng-submit="submitLogin()">
+                            <div ng-repeat="x in you">
+                                <p style="display:none">{{x.id}}</p>
+                            </div>
+                            <div >
+                                <label>Email Address</label>
+                                <input type="text" name="email" ng-model="email" class="form-control" />
+                            </div>
+                            <div>
+                                <label>Password</label>
+                                <input type="password" name="password" ng-model="password" class="form-control" />
+                            </div>
+                            <div>
+                                <input type="submit" name="login" class="submit" value="Log In" />
+                                <input type="checkbox" /><span> Keep me Signed In</span>
+                                <br>
+                                <p><span>Not a member? </span>
+                                    <input type="button"  class="button-register"  ng-click="showRegister()" value="Register"/>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- REGISTER FORM -->
+                <div  ng-show="register_form">
+                    <div>
+                        <h3>CREATE ACCOUNT</h3>
+                    </div>
+    
+                    <div>
+                        <form id="register_form">
+                            <div>
+                                <label>Enter Your Fullname</label>
+                                <input ng-model="register_name" type="text" name="name" required>
+                            </div>
+                            <div>
+                                <label>Enter Your Email Address</label>
+                                <input ng-model="register_email" type="text" name="email" required>
+                            </div>
+                            <div>
+                                <label>Enter Your Password</label>
+                                <input ng-model="register_password" type="password" name="password" required>
+                            </div>
+                                <label>Upload Photo</label>
+                                <input type="file" name="inputfieldname">
+                            <div>
+                                <input type="submit" name="login" class="submit" value="Create Account" ng-click="submitRegister()"/>
+                                <br />
+                                <input type="button" ng-click="showLogin()" value="Login" class="button-register">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    
+        </div>  
+    </div>
+
+    <div class="center">
+         <!-- CAROUSEL  -->
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="../../assets/barangay/Barangay.jpg" class="slide-img">
+            </div>
+            <div class="mySlides fade">
+                <img src="../../assets/barangay/Matain,_Subic,_Zambales,_Philippines_-_panoramio.jpg" class="slide-img">
+            </div>
+            <div class="mySlides fade">
+                <img src="../../assets/barangay/Barangay Official.jpg" class="slide-img">
+            </div>
+
+            <div class="right">
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+            </div>
+
+        </div>
+    </div>
+
+  
+</body>
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="login.js"></script>
+<script src="scripts.js"></script>
+</html>
+
+

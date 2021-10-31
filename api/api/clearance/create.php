@@ -5,21 +5,20 @@
   header('Acces-Control-Allow-Headers: Acces-Control-Allow-Headers, Content-Type, Acces-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../../config/Database.php';
-  include_once '../../models/Auth.php';
+  include_once '../../models/Clearance.php';
 
   $database = new Database();
   $db = $database->connect();
-  $register = new Auth($db);
+  $clearance = new Clearance($db);
   $data = json_decode(file_get_contents("php://input"));
-  $register->name = $data->name;
-  $register->email = $data->email;
-  $register->password = password_hash($data->password, PASSWORD_DEFAULT);
-  // $register->img = $data->img;
-  if($register->register()){
-    echo json_encode(array('message' => 'User Created'));
+  $clearance->name = $data->name;
+  $clearance->address = $data->address;
+  $clearance->reason = $data->reason;
+
+  if($clearance->create()){
+    echo json_encode(array('message' => 'Clearance Created'));
   }
   else{
-    echo json_encode(array('message' => 'User Not Created'));
+    echo json_encode(array('message' => 'Clearance Not Created'));
   } 
-
 ?>

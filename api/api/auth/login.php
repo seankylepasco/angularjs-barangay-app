@@ -9,32 +9,28 @@
 
   $database = new Database();
   $db = $database->connect();
-
   $auth = new auth($db);
-
   $data = json_decode(file_get_contents("php://input"));
-  
   $auth->email = $data->email;
   $auth->password = $data->password;
-
   $result = $auth->login();
   $num = $result->rowCount();
 
   if($num > 0) {
-    $test_arr =array();
+    $arr=array();
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
       $verify = password_verify($data->password, $row['password']);
       if($verify){
-        array_push($test_arr, $row);
+        array_push($arr, $row);
       }
       else{
-        array_push($test_arr,  array('message' => 'No users Found'));
+        array_push($arr, array('message' => 'No Users Found'));
       }
     }
-    echo json_encode($test_arr);
+    echo json_encode($arr);
   } else {
     echo json_encode(
-      array('message' => 'No users Found')
+      array('message' => 'No Users Found')
     );
   }
 
