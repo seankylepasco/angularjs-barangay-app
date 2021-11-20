@@ -5,8 +5,7 @@
 	<meta charset="UTF-8">
 	<title> Barangay Records Management System</title>
 	<link rel="stylesheet" href="login.css">
-	<link rel ="icon" href="../../assets/barangay/Barangay Logo.png" type ="image/x-icon">
-	<style type="text/css"></style> 
+	<link rel ="icon" href="../../assets/barangay/Barangay Logo.png" type ="image/x-icon"> 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@8/dist/sweetalert2.min.css">
 </head>
@@ -69,12 +68,15 @@
                 </div>
                 <!-- REGISTER FORM -->
                 <div  ng-show="register_form">
+
                     <div>
                         <h3>CREATE ACCOUNT</h3>
                     </div>
     
                     <div>
+
                         <form id="register_form">
+
                             <div>
                                 <label>Enter Your Fullname</label>
                                 <input ng-model="register_name" type="text" name="name" required>
@@ -88,41 +90,24 @@
                                 <input ng-model="register_password" type="password" name="password" required>
                             </div>
                                 <label>Upload Photo</label>
-                                <input type="file" name="inputfieldname">
+                                <input type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc">
+                                <img ng-src="{{imageSrc}}" class="img">
                             <div>
                                 <input type="submit" name="login" class="submit" value="Create Account" ng-click="submitRegister()"/>
                                 <br />
                                 <input type="button" ng-click="showLogin()" value="Login" class="button-register">
                             </div>
+                            
                         </form>
                     </div>
+
                 </div>
             </div>
     
         </div>  
     </div>
 
-    <div class="center">
-         <!-- CAROUSEL  -->
-        <div class="slideshow-container">
-            <div class="mySlides fade">
-                <img src="../../assets/barangay/Barangay.jpg" class="slide-img">
-            </div>
-            <div class="mySlides fade">
-                <img src="../../assets/barangay/Matain,_Subic,_Zambales,_Philippines_-_panoramio.jpg" class="slide-img">
-            </div>
-            <div class="mySlides fade">
-                <img src="../../assets/barangay/Barangay Official.jpg" class="slide-img">
-            </div>
 
-            <div class="right">
-                <span class="dot"></span> 
-                <span class="dot"></span> 
-                <span class="dot"></span> 
-            </div>
-
-        </div>
-    </div>
 
   
 </body>
@@ -130,7 +115,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="login.js"></script>
-<script src="scripts.js"></script>
+<!-- <script src="scripts.js"></script> -->
 </html>
 
 

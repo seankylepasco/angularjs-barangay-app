@@ -1,9 +1,7 @@
-// ============================== APP CONTACT US ================================= //
-
-var app = angular.module('contact', []);
+let app = angular.module('contact', []);
 app.controller('ContactController', function($scope, $http){
 
-// --------------- NAVIGATION -----------------------
+// --------------- open side nav -----------------------
      $scope.openNav = function(){
           document.getElementById("nav").style.width = "250px";
           document.getElementById("nav").style.padding = "5px";
@@ -11,6 +9,7 @@ app.controller('ContactController', function($scope, $http){
           document.getElementById("btn-open").style.display = "none";
           document.getElementById("btn-close").style.display = "block";
      }
+// --------------- close side nav -----------------------
      $scope.closeNav = function(){
           document.getElementById("nav").style.width = "0";
           document.getElementById("main").style.marginLeft= "0";
@@ -18,15 +17,15 @@ app.controller('ContactController', function($scope, $http){
           document.getElementById("btn-close").style.display = "none";
           document.getElementById("btn-open").style.display = "block";
      }
-// --------------- SEND EMAIL  -----------------------
+// --------------- submit email  -----------------------
      $scope.sendEmail = function(){  
 
-          $http.post("../../../api/api/contact/create.php", {
-            'name':$scope.name,
-            'email':$scope.email,
+          $http.post("../../../api/contact", {
+            'fullname':$scope.name,
+            'email_address':$scope.email,
             'subject':$scope.subject,
             'message':$scope.message,
-            'mobile':$scope.mobile,
+            'contact_number':$scope.mobile,
 
            })
           .success(function(data){  
@@ -40,7 +39,7 @@ app.controller('ContactController', function($scope, $http){
 
           }); 
      }
-// --------------- LOGOUT USER -----------------------
+// --------------- logout -----------------------
      $scope.logout = function(){  
           Swal.fire({
                title: 'Are you sure to logout?',
@@ -66,9 +65,9 @@ app.controller('ContactController', function($scope, $http){
                }
           })
      } 
-
+// --------------- get user -----------------------
      $scope.getUSer = function(){  
-          console.log("hello")
+          
           if (localStorage.getItem("name") === null) {
                window.location.replace("../../login/Login.html");
           }

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@8/dist/sweetalert2.min.css">
 
   </head>
+  
   <body ng-app="chart" ng-controller="ChartController" ng-init="getUser()">
       
       <nav id="nav" class="sidenav color-white">
@@ -24,7 +25,14 @@
               </div>
               <h4>Barangay Records Management System</h4>
               <hr>
-              <b class="row center"><p>Hello !&nbsp;<p id="superName"></p></p></b>
+
+              <div class="row">
+
+                <img id="myImage" style="width: 50px; height: 50px; object-fit: cover;">
+                <b class="row center"><p>Hello !&nbsp;<p id="superName"></p></p></b>
+                
+              </div>
+
           </div>
 
           <div class="col">
@@ -64,18 +72,20 @@
 
       <div class="row">
         <br><br>
-        <!-- CHART -->
-        <div id="chartContainer" style="width:100%; height:100%"></div>
 
+        <!-- CHART -->
+        <div class="chart-container"></div>
+        <canvas id="myChart"></canvas>
+
+      </div>
 
   </body>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://kit.fontawesome.com/c4442c2032.js" crossorigin="anonymous"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js'></script>
   <script src="../../js/jquery-3.2.1.min.js"></script>
-  <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   <script src='chart.js'></script>
-  <script src='script.js'></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </html>

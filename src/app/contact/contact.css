@@ -1,11 +1,12 @@
 body{
   margin: 0;
   padding: 0;
+  background-image: url("../assets/barangay/background.jpg");
 }
   
 .background {
-  background-color: #0093E9;
-  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+  background-color: #2bf27e;
+  background-image: linear-gradient(45deg, #2bf27e 0%, #FFFB7D 100%);
 }
   
 .wrapper{
@@ -16,7 +17,7 @@ body{
   max-width: 560px;
   width: 440%;
   background: #fff;
-  padding: 36px;
+  padding: 100px;
   border-radius: 5px;
 }
   
@@ -68,7 +69,6 @@ body{
   transition: all 0.5s ease;
 }
 
-  /* MAX WIDTH */
 @media screen and (max-width: 800px) {
   .wrapper {
     transform: none;

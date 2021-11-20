@@ -1,10 +1,7 @@
-
-// ============================== APP RESIDENT PERMIT ================================= //
-
-var app = angular.module("permit",[]);  
-     app.controller("PermitController", function($scope, $http){   
-
-// --------------- NAVIGATION -----------------------
+let baseURL = 'http://localhost/BarangaySystem/api/';
+let app = angular.module("permit",[]);  
+app.controller("PermitController", function($scope, $http){   
+// --------------- open side nav -----------------------
      $scope.openNav = function(){
           document.getElementById("nav").style.width = "250px";
           document.getElementById("nav").style.padding = "5px";
@@ -12,6 +9,7 @@ var app = angular.module("permit",[]);
           document.getElementById("btn-open").style.display = "none";
           document.getElementById("btn-close").style.display = "block";
      }
+// --------------- open side nav -----------------------
      $scope.closeNav = function(){
           document.getElementById("nav").style.width = "0";
           document.getElementById("main").style.marginLeft= "0";
@@ -19,11 +17,11 @@ var app = angular.module("permit",[]);
           document.getElementById("btn-close").style.display = "none";
           document.getElementById("btn-open").style.display = "block";
      }
- // --------------- PRINT -----------------------
- $scope.print = function(){  
-     window.open("../../../../forms/Barangay Permit.pdf", '_blank');
-}  
-// --------------- LOGOUT USER -----------------------
+ // --------------- open print -----------------------
+     $scope.print = function(){  
+          window.open("../../../../forms/Barangay Permit.pdf", '_blank');
+     }  
+// --------------- logout -----------------------
      $scope.logout = function(){  
           Swal.fire({
                title: 'Are you sure to logout?',
@@ -49,8 +47,9 @@ var app = angular.module("permit",[]);
                }
           })
      } 
- // --------------- GET RESIDENTS -----------------------
+ // --------------- get  -----------------------
      $scope.displayData = function(){  
+          const img = localStorage.getItem("img");
           const name = localStorage.getItem("name");
           if (name != 'undefined'){
           }
@@ -60,15 +59,16 @@ var app = angular.module("permit",[]);
           else if (name === ''){
                window.location.replace("Login.php");
           }
-          $http.get("../../../../api/api/permit/read.php")  
+          $http.post(baseURL+"permit")  
           .success(function(data){  
-               $scope.names = data;  
+               $scope.permit = data.payload;  
           });  
           document.getElementById("superName").innerHTML = localStorage.getItem("name");
+          document.getElementById("myImage").src=img;
      }  
-// --------------- CREATE RESIDENT -----------------------
+// --------------- create permit -----------------------
      $scope.insertData = function(){  
-          $http.post("../../../../api/api/permit/create.php", {
+          $http.post(baseURL+"addpermit", {
             'name':$scope.name,
             'reason':$scope.reason,
             'address':$scope.address
@@ -82,9 +82,9 @@ var app = angular.module("permit",[]);
                $scope.reason = "";
           });  
      }  
-// --------------- UPDATE RESIDENT -----------------------
+// --------------- update permit -----------------------
      $scope.updateData = function(){
-          $http.post("../../../../api/api/permit/update.php", {
+          $http.post(baseURL+"updatepermit", {
                'id':$scope.edit_id,
                'name':$scope.edit_name,
                'reason':$scope.edit_reason,
@@ -96,11 +96,11 @@ var app = angular.module("permit",[]);
                   $scope.displayData();
              });  
         }
-// --------------- DELETE RESIDENT -----------------------
+// --------------- delete permit -----------------------
      $scope.deleteData = function(id){
 
        if(confirm("are you sure?")){
-         $http.post("../../../../api/api/permit/delete.php/", {'id':id}) 
+         $http.post(baseURL+"deletepermit/"+id, {'id':id}) 
          .success(function(data){  
                alert("record deleted successfully!");
                $scope.displayData();
@@ -112,16 +112,16 @@ var app = angular.module("permit",[]);
        }
        
      }
-// --------------- SEARCH RESIDENT-----------------------
+// --------------- search permit -----------------------
      $scope.searchResident = function() {
-          $http.post("../../../../api/api/permit/search.php", {
+          $http.post(baseURL+"permit/"+$scope.search, {
             'search_query':$scope.search
           })
           .success(function(data){  
-              $scope.names = data;
+              $scope.permit = data.payload;
           });  
      }
-// --------------- OPEN UPDATE MODAL -----------------------
+// --------------- open edit modal  -----------------------
      $scope.openEdit = function(data){
        document.getElementById("edit-modal").style.display = "block";
        document.getElementById("add-modal").style.display = "none";
@@ -134,7 +134,7 @@ var app = angular.module("permit",[]);
      $scope.closeEdit = function(){
           document.getElementById("edit-modal").style.display = "none";
      }
-// --------------- OPEN CREATE MODAL -----------------------
+// --------------- open add modal -----------------------
      $scope.openAdd = function() {
        document.getElementById("add-modal").style.display = "block";
        document.getElementById("edit-modal").style.display = "none";
@@ -142,18 +142,18 @@ var app = angular.module("permit",[]);
      $scope.closeAdd = function() {
           document.getElementById("add-modal").style.display = "none";
      }
-// --------------- CLOCK  -----------------------
+// --------------- clock  -----------------------
 
      $scope.startTime = function() {
-          var today = new Date();
-          var h = today.getHours();
-          var m = today.getMinutes();
-          var s = today.getSeconds();
-          var day = today.getDay();
-          var month = today.getMonth();
-          var year = today.getFullYear();
-          var date = today.getDate();
-          var dd = (h >= 12) ? 'PM' : 'AM';
+          let today = new Date();
+          let h = today.getHours();
+          let m = today.getMinutes();
+          let s = today.getSeconds();
+          let day = today.getDay();
+          let month = today.getMonth();
+          let year = today.getFullYear();
+          let date = today.getDate();
+          let dd = (h >= 12) ? 'PM' : 'AM';
       
           h = (h > 12) ? (h - 12) : h;
           h = $scope.checkTime(h);
@@ -163,7 +163,7 @@ var app = angular.module("permit",[]);
           month = $scope.checkMonth(month);
       
           $('#timepiece').html(h + ":" + m + ":" + s + ' ' + dd );
-          var t = setTimeout($scope.startTime, 500);
+          let t = setTimeout($scope.startTime, 500);
           $('#day').html(day);
           $('#calendar').html(month + ' ' + date +','+year );
 

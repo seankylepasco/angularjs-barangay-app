@@ -4,7 +4,18 @@ body, html{
     padding: 0;
     height: 100%;
     width: 100%;
-    font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;;
+    font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+    background-image: url("../assets/barangay/background.jpg");
+}
+#btn-open{
+  background-color: transparent;
+  color: #ffff;
+  border: none;
+}
+#btn-close{
+  background-color: transparent;
+  color: #ffff;
+  border: none;
 }
 input{
   padding: 10px;
@@ -33,11 +44,11 @@ table {
   margin: 25px 0;
   font-size: 0.9em;
   font-family: sans-serif;
-  min-width: 400px;
+  min-width: 600px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 } 
 thead tr {
-  background-color: #00ADB5;
+  background-color: #00A650;
   color: #ffffff;
   text-align: left;
 }  
@@ -51,11 +62,11 @@ tbody tr:nth-of-type(even) {
   background-color: #f3f3f3;
 }  
 tbody tr:last-of-type {
-  border-bottom: 2px solid #00ADB5;
+  border-bottom: 2px solid #00A650;
 }  
 tbody tr.active-row {
   font-weight: bold;
-  color: #00ADB5;
+  color: #00A650;
 }
 a {
   padding: 10px;
@@ -63,9 +74,9 @@ a {
   text-decoration: none;
 }
 a:hover {
-   background-color: #00ADB5;
+   background-color: #00A650;
 } 
-/* GOOGLE BUTTON */
+/* BUTTONS CSS */
 .button-17 {
   align-items: center;
   appearance: none;
@@ -125,68 +136,28 @@ a:hover {
 .button-17:disabled {
   box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
 }
-  /* DRIBBBLE BUTTON */
-.button-1 {
-  background-color: #EA4C89;
+.button-2 {
+  background-color: rgba(51, 51, 51, 0.05);
   border-radius: 8px;
-  border-style: none;
-  box-sizing: border-box;
-  color: #FFFFFF !important;
+  border-width: 0;
+  color: #333333;
   cursor: pointer;
   display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-weight: 500;
-  height: 40px;
   line-height: 20px;
   list-style: none;
   margin: 0;
-  outline: none;
-  padding: 10px 16px;
-  position: relative;
+  padding: 10px 12px;
   text-align: center;
-  text-decoration: none;
-  transition: color 100ms;
+  transition: all 200ms;
   vertical-align: baseline;
+  white-space: nowrap;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
 }
-  
-.button-1:hover,
-.button-1:focus {
-  background-color: #F082AC;
-  } */
-.button-1 {
-  background-color: #EA4C89;
-  border-radius: 8px;
-  border-style: none;
-  box-sizing: border-box;
-  color: #FFFFFF;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 500;
-  height: 40px;
-  line-height: 20px;
-  list-style: none;
-  margin: 0;
-  outline: none;
-  padding: 10px 16px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  transition: color 100ms;
-  vertical-align: baseline;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  }
-  
-  .button-1:hover,
-  .button-1:focus {
-  background-color: #F082AC;
-}
-/* GITHUB BUTTON */
 .button-3 {
   appearance: none;
   background-color: #2ea44f;
@@ -254,6 +225,7 @@ a:hover {
   display: flex;
   align-items: flex-end;
 }
+
 /* HEADER */
 header{
   display: flex;
@@ -335,9 +307,9 @@ header{
   background-color: rgba(0,0,0,0.4); 
 }
 .modal-content {
-background-color: #ffff;
-  margin: 15% auto;
-  padding: 50px;
+  background-color: #ffff;
+  margin: auto;
+  padding: 5px;
   border: 1px solid #888;
   width: 40%; 
   border-radius: 15px;

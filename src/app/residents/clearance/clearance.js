@@ -1,10 +1,7 @@
-
-// ============================== APP RESIDENT CLEARANCE ================================= //
-
-var app = angular.module("clearance",[]);  
-     app.controller("ClearanceController", function($scope, $http){   
-
-// --------------- NAVIGATION -----------------------
+let baseURL = 'http://localhost/BarangaySystem/api/';
+let app = angular.module("clearance",[]);  
+app.controller("ClearanceController", function($scope, $http){   
+// --------------- open side nav -----------------------
      $scope.openNav = function(){
           document.getElementById("nav").style.width = "250px";
           document.getElementById("nav").style.padding = "5px";
@@ -12,6 +9,7 @@ var app = angular.module("clearance",[]);
           document.getElementById("btn-open").style.display = "none";
           document.getElementById("btn-close").style.display = "block";
      }
+// --------------- close side nav -----------------------
      $scope.closeNav = function(){
           document.getElementById("nav").style.width = "0";
           document.getElementById("main").style.marginLeft= "0";
@@ -19,7 +17,7 @@ var app = angular.module("clearance",[]);
           document.getElementById("btn-close").style.display = "none";
           document.getElementById("btn-open").style.display = "block";
      }
-// --------------- LOGOUT USER -----------------------
+// --------------- logout user -----------------------
      $scope.logout = function(){  
           Swal.fire({
                title: 'Are you sure to logout?',
@@ -45,8 +43,9 @@ var app = angular.module("clearance",[]);
                }
           })
      } 
- // --------------- GET RESIDENTS -----------------------
+ // --------------- get residents -----------------------
      $scope.displayData = function(){  
+          const img = localStorage.getItem("img");
           const name = localStorage.getItem("name");
           if (name != 'undefined'){
           }
@@ -56,19 +55,20 @@ var app = angular.module("clearance",[]);
           else if (name === ''){
                window.location.replace("Login.php");
           }
-          $http.get("../../../../api/api/clearance/read.php")  
+          $http.post(baseURL+"clearance")  
           .success(function(data){  
-               $scope.names = data;  
+               $scope.clearance = data.payload;  
           });  
           document.getElementById("superName").innerHTML = localStorage.getItem("name");
+          document.getElementById("myImage").src=img;
      }  
- // --------------- PRINT -----------------------
+ // --------------- open print -----------------------
      $scope.print = function(){  
           window.open("../../../../forms/Barangay Clearance.pdf", '_blank');
      }  
-// --------------- CREATE RESIDENT -----------------------
+// --------------- create new resident -----------------------
      $scope.insertData = function(){  
-          $http.post("../../../../api/api/clearance/create.php", {
+          $http.post(baseURL+"addclearance", {
             'name':$scope.name,
             'reason':$scope.reason,
             'address':$scope.address
@@ -82,9 +82,9 @@ var app = angular.module("clearance",[]);
                $scope.reason = "";
           });  
      }  
-// --------------- UPDATE RESIDENT -----------------------
+// --------------- update resident -----------------------
      $scope.updateData = function(){
-          $http.post("../../../../api/api/clearance/update.php", {
+          $http.post(baseURL+"updateclearance", {
                'id':$scope.edit_id,
                'name':$scope.edit_name,
                'reason':$scope.edit_reason,
@@ -96,11 +96,10 @@ var app = angular.module("clearance",[]);
                   $scope.displayData();
              });  
         }
-// --------------- DELETE RESIDENT -----------------------
+// --------------- delete resident -----------------------
      $scope.deleteData = function(id){
-
        if(confirm("are you sure?")){
-         $http.post("../../../../api/api/clearance/delete.php/", {'id':id}) 
+         $http.post(baseURL+"deleteclearance/"+id, {'id':id}) 
          .success(function(data){  
                alert("record deleted successfully!");
                $scope.displayData();
@@ -112,16 +111,16 @@ var app = angular.module("clearance",[]);
        }
        
      }
-// --------------- SEARCH RESIDENT-----------------------
+// --------------- search resident -----------------------
      $scope.searchResident = function() {
-          $http.post("../../../../api/api/clearance/search.php", {
+          $http.post(baseURL+"clearance/"+$scope.search, {
             'search_query':$scope.search
           })
           .success(function(data){  
-              $scope.names = data;
+              $scope.clearance = data.payload;
           });  
      }
-// --------------- OPEN UPDATE MODAL -----------------------
+// --------------- open edit modal -----------------------
      $scope.openEdit = function(data){
        document.getElementById("edit-modal").style.display = "block";
        document.getElementById("add-modal").style.display = "none";
@@ -134,7 +133,7 @@ var app = angular.module("clearance",[]);
      $scope.closeEdit = function(){
           document.getElementById("edit-modal").style.display = "none";
      }
-// --------------- OPEN CREATE MODAL -----------------------
+// --------------- open create modal -----------------------
      $scope.openAdd = function() {
        document.getElementById("add-modal").style.display = "block";
        document.getElementById("edit-modal").style.display = "none";
@@ -142,18 +141,18 @@ var app = angular.module("clearance",[]);
      $scope.closeAdd = function() {
           document.getElementById("add-modal").style.display = "none";
      }
-// --------------- CLOCK  -----------------------
+// --------------- time scripts  -----------------------
 
      $scope.startTime = function() {
-          var today = new Date();
-          var h = today.getHours();
-          var m = today.getMinutes();
-          var s = today.getSeconds();
-          var day = today.getDay();
-          var month = today.getMonth();
-          var year = today.getFullYear();
-          var date = today.getDate();
-          var dd = (h >= 12) ? 'PM' : 'AM';
+          let today = new Date();
+          let h = today.getHours();
+          let m = today.getMinutes();
+          let s = today.getSeconds();
+          let day = today.getDay();
+          let month = today.getMonth();
+          let year = today.getFullYear();
+          let date = today.getDate();
+          let dd = (h >= 12) ? 'PM' : 'AM';
       
           h = (h > 12) ? (h - 12) : h;
           h = $scope.checkTime(h);
@@ -163,7 +162,7 @@ var app = angular.module("clearance",[]);
           month = $scope.checkMonth(month);
       
           $('#timepiece').html(h + ":" + m + ":" + s + ' ' + dd );
-          var t = setTimeout($scope.startTime, 500);
+          let t = setTimeout($scope.startTime, 500);
           $('#day').html(day);
           $('#calendar').html(month + ' ' + date +','+year );
 

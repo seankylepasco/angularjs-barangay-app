@@ -24,7 +24,14 @@
               </div>
               <h4>Barangay Records Management System</h4>
               <hr>
-              <b class="row center"><p>Hello !&nbsp;<p id="superName"></p></p></b>
+
+              <div class="row">
+
+                <img id="myImage" style="width: 50px; height: 50px; object-fit: cover;">
+                <b class="row center"><p>Hello !&nbsp;<p id="superName"></p></p></b>
+
+              </div>
+
           </div>
 
           <div class="col">
@@ -46,8 +53,8 @@
       <!-- HEADER -->
       <header ng-init="startTime()">
 
-        <button id="btn-open" class="button-17" role="button" ng-click="openNav()"><i class="fas fa-bars"></i></button> 
-        <button id="btn-close" class="button-17" role="button" ng-click="closeNav()"><i class="fas fa-bars"></i></button> 
+        <button id="btn-open" role="button" ng-click="openNav()"><i class="fas fa-bars"></i></button> 
+        <button id="btn-close" role="button" ng-click="closeNav()"><i class="fas fa-bars"></i></button> 
 
         <div id="time-container" class="center">
           <div id="time" class="column">
@@ -90,17 +97,17 @@
               </tr>  
             </thead>
             <tbody>
-              <tr ng-repeat="x in names">  
+              <tr ng-repeat="x in permit">  
                 <td style="width:200px">{{x.id}}</td>  
                 <td>{{x.name}}</td>  
                 <td>{{x.address}}</td>  
                 <td>{{x.reason}}</td>  
                 <td>{{x.created}}</td>  
                 <td>
-                    <button class="button-3" ng-click="openEdit(x)">Edit</button>
+                    <button ng-click="openEdit(x)" class="button-3">Edit</button>
                   </td>
                   <td> 
-                    <button class="button-1" ng-click="deleteData(x.id)">Delete</button>
+                    <button ng-click="deleteData(x.id)" class="button-2">Delete</button>
                   </td>
               </tr>  
             </tbody>
@@ -111,15 +118,18 @@
 
         <!-- UPDATE MODAL -->
         <div id="edit-modal" class="modal">
-          <div class="modal-content col">
-            
-            <div class="modal-header">
-              <span class="close button-1" ng-click="closeEdit()">&times;</span>
-              <h3>Edit Resident</h3>
-            </div>
+          <div class="modal-content">
+          
+            <span ng-click="closeEdit()" class="button-2" style="float: right">&times;</span>
+            <h3 class="center">Edit Resident</h3>
+
+            <hr>
+            <br>
 
             <div class="modal-body">
-              <form>
+
+              <form class="col">
+
                 <input ng-model="edit_id" id="edit_id" type="hidden" style="width: 90%" required>
                 <br><br> 
                 <label for="edit_name">Fullname</label>
@@ -133,41 +143,52 @@
                 <br><br>
 
                 <div style="width: 40%; margin: auto">
-                  <button class="button-1" type="button" ng-click="closeEdit()">close</button>
-                  <button class="button-3"  ng-click="updateData()">Save</button>
+                  <button ng-click="updateData()" class="button-3">Save</button>
+                  <button ng-click="closeEdit()" class="button-2">close</button>
                 </div>
+
               </form>
+
             </div>
 
           </div>
+
         </div>
 
         <!-- ADD MODAL -->
         <div id="add-modal" class="modal">
+
           <div class="modal-content">
-            <span ng-click="closeAdd()" class="close button-1">&times;</span>
-            <h3>Create Barangay Clearance</h3>
-            <br>
+
+            <span ng-click="closeAdd()" class="button-2" style="float: right">&times;</span>
+            <h3 class="center">Create Barangay Clearance</h3>
+
             <hr>
             <br>
-            <form>
-            <label>Name</label>
-              <input ng-model="name" type="text" placeholder="name" style="width: 90%" required> 
-              <br><br> 
-              <label>Reason</label>
-              <textarea ng-model="reason" placeholder="reason" style="width: 90%" required></textarea>
-              <br><br> 
-              <label>Address</label>
-              <input  ng-model="address" type="text" placeholder="address" style="width: 90%"> 
-              <br><br>
-              <div style="width: 40%; margin: auto">
-                <br>
-                <button class="button-1" type="button" ng-click="closeAdd()">close</button>
-                <button class="button-3"  type="button" ng-click="insertData()">Create</button>
-              </div>
+
+            <form class="col">
+              
+              <label>Name</label>
+                <input ng-model="name" type="text" placeholder="name" style="width: 90%" required> 
+                <br><br> 
+                <label>Reason</label>
+                <textarea ng-model="reason" placeholder="reason" style="width: 90%" required></textarea>
+                <br><br> 
+                <label>Address</label>
+                <input  ng-model="address" type="text" placeholder="address" style="width: 90%"> 
+                <br><br>
+                <div style="width: 40%; margin: auto">
+                  <br>
+                  <button ng-click="closeAdd()" class="button-2">close</button>
+                  <button ng-click="insertData()" class="button-3">Create</button>
+                </div>
+
             </form>
+
           </div>
+          
         </div>
+
     </div>
 
   </body>

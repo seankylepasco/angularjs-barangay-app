@@ -1,10 +1,7 @@
-
-// ============================== APP HOME RESIDENTS ================================= //
-
-var app = angular.module("resident",[]);  
-     app.controller("ResidentController", function($scope, $http){   
-
-// --------------- NAVIGATION -----------------------
+let baseURL = 'http://localhost/BarangaySystem/api/';
+let app = angular.module("resident",[]);  
+app.controller("ResidentController", function($scope, $http){   
+// --------------- open side nav -----------------------
      $scope.openNav = function(){
           document.getElementById("nav").style.width = "250px";
           document.getElementById("nav").style.padding = "5px";
@@ -12,6 +9,7 @@ var app = angular.module("resident",[]);
           document.getElementById("btn-open").style.display = "none";
           document.getElementById("btn-close").style.display = "block";
      }
+// --------------- close side nav -----------------------
      $scope.closeNav = function(){
           document.getElementById("nav").style.width = "0";
           document.getElementById("main").style.marginLeft= "0";
@@ -19,7 +17,7 @@ var app = angular.module("resident",[]);
           document.getElementById("btn-close").style.display = "none";
           document.getElementById("btn-open").style.display = "block";
      }
-// --------------- LOGOUT USER -----------------------
+// --------------- logout -----------------------
      $scope.logout = function(){  
           Swal.fire({
                title: 'Are you sure to logout?',
@@ -36,7 +34,7 @@ var app = angular.module("resident",[]);
                }
              }).then((result) => {
                if (result.isConfirmed) {
-                    localStorage.removeItem("name");
+                  
                     Swal.fire('Logout!', '', 'success');
                     window.location.replace("../../login/Login.html");
 
@@ -45,9 +43,13 @@ var app = angular.module("resident",[]);
                }
           })
      } 
- // --------------- GET RESIDENTS -----------------------
+ // --------------- get residents -----------------------
      $scope.displayData = function(){  
+
           const name = localStorage.getItem("name");
+          const img = localStorage.getItem("img");
+
+          $scope.myImage = img;
           if (localStorage.getItem("name") === null) {
                window.location.replace("../../login/Login.html");
           }
@@ -59,14 +61,19 @@ var app = angular.module("resident",[]);
           else if (name === ''){
                window.location.replace("../../login/Login.html");
           }
-          $http.get("../../../../api/api/residents/read.php")  
+          $http.post(baseURL+"residents")  
           .success(function(data){  
-               $scope.names = data;  
+
+               $scope.names = data.payload;  
           });  
+
           document.getElementById("superName").innerHTML = localStorage.getItem("name");
+          document.getElementById("myImage").src=img;
+ 
      }  
-// --------------- CREATE RESIDENT -----------------------
+// --------------- create resident -----------------------
      $scope.insertData = function(){  
+          
           if(!$scope.name){
                alert('missing name!')
           }
@@ -82,7 +89,7 @@ var app = angular.module("resident",[]);
           else if(!$scope.purok){
                alert('missing purok!')
           }
-          var d = $scope.birthdate;
+          let d = $scope.birthdate;
           if( !!d.valueOf() ) {
                year = d.getFullYear();
                month = d.getMonth()+1;
@@ -90,7 +97,7 @@ var app = angular.module("resident",[]);
                d.setDate(day+1);
                d = d;
           }
-          $http.post("../../../../api/api/residents/create.php", {
+          $http.post(baseURL+"addresident", {
             'name':$scope.name,
             'email':$scope.email,
             'birthdate':$scope.birthdate,
@@ -102,7 +109,6 @@ var app = angular.module("resident",[]);
            })
           .success(function(data){  
                alert("record added successfully!");
-               
                $scope.displayData();
                document.getElementById("add-modal").style.display = "none";
                $scope.name = "";
@@ -113,11 +119,14 @@ var app = angular.module("resident",[]);
                $scope.purok = "";
                $scope.voter_status = "";
                $scope.civil_status = "";
+          })
+          .fail(function(data){
+               console.log(data)
           });  
      }  
-// --------------- UPDATE RESIDENT -----------------------
+// --------------- update resident -----------------------
      $scope.updateData = function(){
-          $http.post("../../../../api/api/residents/update.php", {
+          $http.post(baseURL+"updateresident", {
                'id':$scope.edit_id,
                'name':$scope.edit_name,
                'email':$scope.edit_email,
@@ -132,41 +141,49 @@ var app = angular.module("resident",[]);
                   alert("record updated successfully!");
                   document.getElementById("edit-modal").style.display = "none";
                   $scope.displayData();
+             })
+             .fail(function(data){
+                  console.log(data);
              });  
         }
-// --------------- DELETE RESIDENT -----------------------
+// --------------- delete resident -----------------------
      $scope.deleteData = function(id){
 
        if(confirm("are you sure?")){
-         $http.post("../../../../api/api/residents/delete.php/", {'id':id}) 
+         $http.post(baseURL+"deleteresident/"+id, {'id':id}) 
          .success(function(data){  
                alert("record deleted successfully!");
                $scope.displayData();
+          })
+          .fail(function(data){
+               console.log(data)
           });   
        }
-
        else {
          return false;
        }
        
      }
-// --------------- SEARCH RESIDENT-----------------------
+// --------------- search resident -----------------------
      $scope.searchResident = function() {
-          $http.post("../../../../api/api/residents/search.php", {
+          $http.post(baseURL+"residents/"+$scope.search, {
             'search_query':$scope.search
           })
           .success(function(data){  
-              $scope.names = data;
+              $scope.names = data.payload;
+          })
+          .fail(function(data){
+               console.log(data)
           });  
      }
-// --------------- SELECT PHOTO -----------------------
+// --------------- select image -----------------------
      $scope.setPhoto = function(){
           $scope.img = event.target.files[0];
-          var reader = new FileReader();
+          let reader = new FileReader();
           reader.onload = (event) => { event.target.result; }
           reader.readAsDataURL($scope.img);
      }
-// --------------- OPEN UPDATE MODAL -----------------------
+// --------------- open edit modal -----------------------
      $scope.openEdit = function(data){
        document.getElementById("edit-modal").style.display = "block";
        document.getElementById("add-modal").style.display = "none";
@@ -182,11 +199,10 @@ var app = angular.module("resident",[]);
        $scope.edit_img = data.img;
        $scope.id = data.id;  
      }
-
      $scope.closeEdit = function(){
           document.getElementById("edit-modal").style.display = "none";
      }
-// --------------- OPEN CREATE MODAL -----------------------
+// --------------- open add modal  -----------------------
      $scope.openAdd = function() {
        document.getElementById("add-modal").style.display = "block";
        document.getElementById("edit-modal").style.display = "none";
@@ -194,44 +210,33 @@ var app = angular.module("resident",[]);
      $scope.closeAdd = function() {
           document.getElementById("add-modal").style.display = "none";
      }
-// --------------- CLOCK  -----------------------
-
+// --------------- clock  -----------------------
      $scope.startTime = function() {
-
-          var today = new Date();
-          var h = today.getHours();
-          var m = today.getMinutes();
-          var s = today.getSeconds();
-          var day = today.getDay();
-          var month = today.getMonth();
-          var year = today.getFullYear();
-          var date = today.getDate();
-          var dd = (h >= 12) ? 'PM' : 'AM';
-      
+          let today = new Date();
+          let h = today.getHours();
+          let m = today.getMinutes();
+          let s = today.getSeconds();
+          let day = today.getDay();
+          let month = today.getMonth();
+          let year = today.getFullYear();
+          let date = today.getDate();
+          let dd = (h >= 12) ? 'PM' : 'AM';
           h = (h > 12) ? (h - 12) : h;
           h = $scope.checkTime(h);
           m = $scope.checkTime(m);
           s = $scope.checkTime(s);
           day = $scope.checkDay(day);
           month = $scope.checkMonth(month);
-      
           $('#timepiece').html(h + ":" + m + ":" + s + ' ' + dd );
-          var t = setTimeout($scope.startTime, 500);
+          let t = setTimeout($scope.startTime, 500);
           $('#day').html(day);
           $('#calendar').html(month + ' ' + date +','+year );
-
      }
-
      $scope.checkTime = function (i) {
-   
           if (i < 10) { i = "0" + i };
           return i;
-      
      }
-
-
      $scope.checkDay = function(day) {
-   
           if (day == 1) {
             return day = 'Monday';
           }
@@ -255,9 +260,7 @@ var app = angular.module("resident",[]);
       
           } 
      }
-
      $scope.checkMonth = function (month){
-   
           if (month == 0){
             return month = 'January';
           }
@@ -293,7 +296,6 @@ var app = angular.module("resident",[]);
           }
           else if(month == 11){
             return month = 'December';
-          }
-          
+          }          
      }
 });
